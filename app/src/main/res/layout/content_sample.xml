@@ -28,9 +28,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/seekBarRoll" />
 
-    <TextView android:text="Yaw" android:layout_width="wrap_content"
+    <TextView android:text="Azimuth" android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textYaw" />
+        android:id="@+id/textAzimuth" />
 
     <SeekBar
         android:layout_width="fill_parent"
