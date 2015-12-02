@@ -1,6 +1,19 @@
 apply plugin: 'com.android.application'
 
 android {
+    lintOptions {
+        checkReleaseBuilds false
+    }
+
+    signingConfigs {
+        appslopers {
+            keyAlias project.property('keyAlias')
+            keyPassword project.property('keyPassword')
+            storeFile file(project.property('storeFile'))
+            storePassword project.property('storePassword')
+        }
+    }
+
     compileSdkVersion 23
     buildToolsVersion "23.0.1"
 
@@ -11,10 +24,20 @@ android {
         versionCode 1
         versionName "1.0"
     }
+
     buildTypes {
+        debug {
+            debuggable true
+        }
         release {
-            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.appslopers
+            proguardFile 'proguard-rules.pro'
+            applicationVariants.all { variant ->
+                appendVersionNameVersionCode(variant, defaultConfig)
+            }
+            minifyEnabled true
+            zipAlignEnabled true
         }
     }
 }
@@ -24,6 +47,18 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.1.0'
     compile 'com.android.support:design:23.1.0'
-
     compile 'com.jmluengo.fusedsensors:fusedsensors:0.1.0'
+}
+
+def appendVersionNameVersionCode(variant, defaultConfig) {
+    //check if staging variant
+    if (variant.name == android.buildTypes.release.name) {
+        variant.outputs.each { output ->
+            def outputFile = output.outputFile
+            if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                def fileName = defaultConfig.applicationId + "-" + defaultConfig.versionName + "-v" + defaultConfig.versionCode + ".apk"
+                output.outputFile = new File(outputFile.parent, fileName)
+            }
+        }
+    }
 }
