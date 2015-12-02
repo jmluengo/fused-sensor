@@ -10,6 +10,8 @@ phone by processing and combining the information provided by the sensors:
 Sometimes sensors data is not very precise and getting an stable data flow is not the easiest task. 
 This code does a nice attempt to help and achieves so with a decent accuracy.
 
+This project is based in the work done by Paul Lawitzki about [sensor fusion in Android][1]
+
 Download
 --------
 
@@ -17,7 +19,7 @@ Download via Gradle:
 
 ```groovy
     dependencies {
-        compile 'com.jmluengo.fusedsensors:0.1.0'
+        compile 'com.jmluengo.fusedsensors:fusedsensors:0.1.0'
     }
 ```
 
@@ -76,7 +78,7 @@ Developed By
 Contributors
 ------------
 
-* [José Miguel Martínez Luengo][1]
+* [José Miguel Martínez Luengo][2]
 
 License
 -------
@@ -96,4 +98,5 @@ License
     limitations under the License.
 
 
-[1]: https://github.com/jmluengo
+[1]: http://www.codeproject.com/Articles/729759/Android-Sensor-Fusion-Tutorial
+[2]: https://github.com/jmluengo
